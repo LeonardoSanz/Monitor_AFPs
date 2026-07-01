@@ -1,34 +1,33 @@
-# AFP Streamlit v15
+# AFP Streamlit v16
 
-Monitor Streamlit para cartera de Fondos de Pensiones usando bases públicas de la Superintendencia de Pensiones.
+Monitor de composición de cartera, apertura granular, contrapartes bancarias y AUM de Fondos de Pensiones, con estilo CMF oscuro.
 
-## Cambios v15
+## Cambios v16
 
-- Se elimina el módulo **AUM por grupo etario ajustado** porque la consulta web del cuadro edad/saldo de la SP puede ser bloqueada en Streamlit Cloud con error 403.
-- Se mantiene **AUM total por fondo** calculado 100% desde la cartera cargada en `data/raw/chistAFP/`.
-- Se agrega **evolutivo AUM por fondo** para el rango global seleccionado.
-- Se agrega tabla resumida descargable del evolutivo AUM por fondo.
-- No usa Excel externo.
+- Renombra `Detalle mínimo` a **Apertura de cartera**.
+- Mantiene apertura por bucket, segmento granular, código de instrumento, fondo y AFP.
+- Refuerza la pestaña **Contrapartes bancarias** con filtros por tipo de banco, AFP, bucket e instrumento.
+- Agrega análisis banco × instrumento, matriz AFP × banco, evolutivo bancario y tabla granular descargable.
+- Mantiene AUM total por fondo y evolutivo AUM por fondo.
 
-## Fuente de datos
+## Fuente
 
-La app lee archivos anuales ZIP o CSV desde:
+La app lee los ZIP/CSV anuales desde:
 
 ```text
-data/raw/chistAFP/
-├── cartera_mensual_2016.zip
-├── cartera_mensual_2017.zip
-└── ...
+data/raw/chistAFP/cartera_mensual_YYYY.zip
 ```
 
-Cada ZIP anual debe contener su CSV `cartera_mensual_YYYY.csv`.
+y procesa automáticamente hacia:
 
-## Login
+```text
+data/processed/
+```
 
-La clave no va en GitHub. En Streamlit Cloud configurar:
+## Streamlit Cloud
+
+No subir `.streamlit/secrets.toml`. Configurar la clave en Secrets:
 
 ```toml
 APP_PASSWORD = "tu_clave"
 ```
-
-Si no se configura `APP_PASSWORD`, la app corre sin login.
