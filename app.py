@@ -1395,14 +1395,14 @@ k4.metric("Fechas mensuales", f"{period['fecha'].nunique():,}".replace(",", ".")
 with st.expander("Descargas generales", expanded=False):
     d1, d2, d3 = st.columns(3)
     with d1:
-        download_button(period, "Descargar cartera neta del rango", "cartera_sistema_periodo_v16.csv", key="dl_period")
+        download_button(period, "Descargar cartera neta del rango", "cartera_sistema_periodo_v17.csv", key="dl_period")
     with d2:
         if len(bank_fact):
             bank_period = bank_fact[(bank_fact["fecha"].ge(start_date)) & (bank_fact["fecha"].le(end_date))]
-            download_button(bank_period, "Descargar contrapartes bancarias del rango", "contrapartes_bancarias_periodo_v16.csv", key="dl_bank_period")
+            download_button(bank_period, "Descargar contrapartes bancarias del rango", "contrapartes_bancarias_periodo_v17.csv", key="dl_bank_period")
     with d3:
         if len(dic):
-            download_button(dic, "Descargar diccionario de instrumentos", "diccionario_tipo_instrumento_v16.csv", key="dl_dic")
+            download_button(dic, "Descargar diccionario de instrumentos", "diccionario_tipo_instrumento_v17.csv", key="dl_dic")
 
 st.divider()
 
@@ -1429,7 +1429,7 @@ with tab_sistema:
     st.markdown("#### Tabla tipo SP: cartera total de los Fondos de Pensiones")
     st.caption(f"Meses visibles: {len(table_dates):,}. Usa la barra horizontal inferior para revisar toda la historia del rango seleccionado.".replace(",", "."))
     render_sp_table(table)
-    download_button(table_download, "Descargar tabla tipo SP completa", "tabla_sp_sistema_total_v16.csv", key="dl_tabla_sp_sistema")
+    download_button(table_download, "Descargar tabla tipo SP completa", "tabla_sp_sistema_total_v17.csv", key="dl_tabla_sp_sistema")
     st.caption(
         "Nota: Fondos de inversión y Otros (RV) incluye activos alternativos cuando el diccionario los clasifica dentro de esa familia. "
         "Otros Nacionales y Otros Extranjeros incluyen derivados y otros instrumentos."
@@ -1441,29 +1441,29 @@ with tab_sistema:
     with st.expander("Nivel 1 · Nacional vs extranjero", expanded=True):
         origen_data, fig_origen = chart_origin(base_date, selected_date, display_mode)
         st.plotly_chart(fig_origen, use_container_width=True)
-        download_button(origen_data, "Descargar data nivel 1", "sistema_nivel_1_origen_v16.csv", key="dl_origen")
+        download_button(origen_data, "Descargar data nivel 1", "sistema_nivel_1_origen_v17.csv", key="dl_origen")
 
     with st.expander("Nivel 2 · Abrir Nacional y Extranjero por clase", expanded=True):
         coln, cole = st.columns(2)
         with coln:
             nacional_data, fig_nacional = chart_class_by_origin(base_date, "Nacional", selected_date, display_mode)
             st.plotly_chart(fig_nacional, use_container_width=True)
-            download_button(nacional_data, "Descargar Nacional", "sistema_nacional_clase_v16.csv", key="dl_nacional_clase")
+            download_button(nacional_data, "Descargar Nacional", "sistema_nacional_clase_v17.csv", key="dl_nacional_clase")
         with cole:
             extranjero_data, fig_extranjero = chart_class_by_origin(base_date, "Extranjero", selected_date, display_mode)
             st.plotly_chart(fig_extranjero, use_container_width=True)
-            download_button(extranjero_data, "Descargar Extranjero", "sistema_extranjero_clase_v16.csv", key="dl_extranjero_clase")
+            download_button(extranjero_data, "Descargar Extranjero", "sistema_extranjero_clase_v17.csv", key="dl_extranjero_clase")
 
     with st.expander("Nivel 3 · Buckets ampliados v1", expanded=True):
         bucket_data, fig_bucket = chart_bucket(base_date, selected_date, display_mode)
         st.plotly_chart(fig_bucket, use_container_width=True)
-        download_button(bucket_data, "Descargar data nivel 3", "sistema_buckets_ampliados_v16.csv", key="dl_buckets")
+        download_button(bucket_data, "Descargar data nivel 3", "sistema_buckets_ampliados_v17.csv", key="dl_buckets")
 
     with st.expander("Evolutivo del sistema total", expanded=True):
         nivel_evo = st.selectbox("Nivel para evolutivo", ["origen", "clase", "bucket_reporte"], format_func=lambda x: {"origen": "Nacional / extranjero", "clase": "Clase", "bucket_reporte": "Bucket ampliado"}[x])
         evo_data, fig_evo = line_evolution(period, nivel_evo, f"Evolución mensual de composición - {start_date:%Y-%m-%d} a {end_date:%Y-%m-%d}", display_mode=display_mode)
         st.plotly_chart(fig_evo, use_container_width=True)
-        download_button(evo_data, "Descargar evolutivo sistema", "sistema_evolutivo_v16.csv", key="dl_evo_sistema")
+        download_button(evo_data, "Descargar evolutivo sistema", "sistema_evolutivo_v17.csv", key="dl_evo_sistema")
 
 
 with tab_apertura:
@@ -1615,7 +1615,7 @@ with tab_fondos:
     )
     fig_fondos.update_layout(height=650, yaxis_title=y_fondos_label)
     st.plotly_chart(fig_fondos, use_container_width=True)
-    download_button(g_fondos, "Descargar data composición por fondo", "fondos_composicion_buckets_v16.csv", key="dl_fondos_comp")
+    download_button(g_fondos, "Descargar data composición por fondo", "fondos_composicion_buckets_v17.csv", key="dl_fondos_comp")
 
     st.markdown("#### Abrir un fondo en detalle")
     fondos = sorted(base_date["tipo_de_fondo"].dropna().unique())
@@ -1627,19 +1627,19 @@ with tab_fondos:
         gf_origen, fig_f_origen = chart_origin(d_fondo, selected_date, display_mode)
         fig_f_origen.update_layout(title=f"Fondo {fondo_sel}: Nacional vs extranjero")
         st.plotly_chart(fig_f_origen, use_container_width=True)
-        download_button(gf_origen, "Descargar origen fondo", f"fondo_{fondo_sel}_origen_v16.csv", key="dl_fondo_origen")
+        download_button(gf_origen, "Descargar origen fondo", f"fondo_{fondo_sel}_origen_v17.csv", key="dl_fondo_origen")
     with c2:
         gf_bucket, fig_f_bucket = chart_bucket(d_fondo, selected_date, display_mode)
         fig_f_bucket.update_layout(title=f"Fondo {fondo_sel}: buckets ampliados")
         st.plotly_chart(fig_f_bucket, use_container_width=True)
-        download_button(gf_bucket, "Descargar buckets fondo", f"fondo_{fondo_sel}_buckets_v16.csv", key="dl_fondo_bucket")
+        download_button(gf_bucket, "Descargar buckets fondo", f"fondo_{fondo_sel}_buckets_v17.csv", key="dl_fondo_bucket")
 
     with st.expander(f"Evolutivo Fondo {fondo_sel}", expanded=True):
         period_fondo = period[period["tipo_de_fondo"].eq(fondo_sel)]
         nivel_fondo = st.selectbox("Nivel evolutivo del fondo", ["origen", "clase", "bucket_reporte"], index=2, format_func=lambda x: {"origen": "Nacional / extranjero", "clase": "Clase", "bucket_reporte": "Bucket ampliado"}[x])
         evo_fondo, fig_evo_fondo = line_evolution(period_fondo, nivel_fondo, f"Fondo {fondo_sel}: evolución mensual de composición", display_mode=display_mode)
         st.plotly_chart(fig_evo_fondo, use_container_width=True)
-        download_button(evo_fondo, "Descargar evolutivo fondo", f"fondo_{fondo_sel}_evolutivo_v16.csv", key="dl_fondo_evo")
+        download_button(evo_fondo, "Descargar evolutivo fondo", f"fondo_{fondo_sel}_evolutivo_v17.csv", key="dl_fondo_evo")
 
 with tab_deriv_alt:
     st.subheader("Alternativos y derivados")
@@ -1659,7 +1659,7 @@ with tab_deriv_alt:
         g_ad = sort_by_order(g_ad, "bucket_reporte", DERIV_ALT_BUCKETS)
         fig_ad = horizontal_bar(g_ad, "bucket_reporte", f"Alternativos y derivados - {selected_date:%Y-%m-%d}", height=470, display_mode=display_mode)
         st.plotly_chart(fig_ad, use_container_width=True)
-        download_button(g_ad, "Descargar corte alternativos/derivados", "alternativos_derivados_corte_v16.csv", key="dl_ad_corte")
+        download_button(g_ad, "Descargar corte alternativos/derivados", "alternativos_derivados_corte_v17.csv", key="dl_ad_corte")
 
         evo_ad = foco_period.groupby(["fecha", "bucket_reporte"], as_index=False).agg(**{VALUE_COL: (VALUE_COL, "sum")})
         totals_period = period.groupby("fecha", as_index=False)[VALUE_COL].sum().rename(columns={VALUE_COL: "total"})
@@ -1678,7 +1678,7 @@ with tab_deriv_alt:
         )
         fig_evo_ad.update_layout(height=620, yaxis_title=y_ad_label)
         st.plotly_chart(fig_evo_ad, use_container_width=True)
-        download_button(evo_ad, "Descargar evolutivo alternativos/derivados", "alternativos_derivados_evolutivo_v16.csv", key="dl_ad_evo")
+        download_button(evo_ad, "Descargar evolutivo alternativos/derivados", "alternativos_derivados_evolutivo_v17.csv", key="dl_ad_evo")
 
         st.markdown("#### Apertura por código de instrumento")
         fam_sel = st.selectbox("Familia", [b for b in DERIV_ALT_BUCKETS if b in foco_date["bucket_reporte"].unique()])
@@ -1688,7 +1688,7 @@ with tab_deriv_alt:
         if len(detail):
             fig_detail = horizontal_bar(detail, "tipo_de_instrumento", f"{fam_sel}: códigos principales", height=560, display_mode=display_mode)
             st.plotly_chart(fig_detail, use_container_width=True)
-            download_button(detail, "Descargar detalle códigos", f"{fam_sel.lower().replace(' ', '_').replace('/', '')}_codigos_v16.csv", key="dl_codigos_deriv")
+            download_button(detail, "Descargar detalle códigos", f"{fam_sel.lower().replace(' ', '_').replace('/', '')}_codigos_v17.csv", key="dl_codigos_deriv")
 
     with st.expander("¿Qué significan SNT, YSET y otros códigos de derivados?", expanded=True):
         if dic.empty:
@@ -1710,270 +1710,450 @@ with tab_deriv_alt:
                 desc = escape(str(r.get("descripcion", "")))
                 dtype = escape(str(r.get("derivado_tipo", "")))
                 st.markdown(f"**{code}** · {dtype}: {desc}")
-            download_button(ddic, "Descargar diccionario de derivados presentes", "diccionario_derivados_presentes_v16.csv", key="dl_dic_deriv")
+            download_button(ddic, "Descargar diccionario de derivados presentes", "diccionario_derivados_presentes_v17.csv", key="dl_dic_deriv")
+
 
 with tab_bancos:
     st.subheader("Contrapartes bancarias: concentración, AFP e instrumentos")
     source_caption(
-        "Esta sección cruza `nombre_del_emisor` normalizado como banco, AFP, fondo, bucket de cartera, "
-        "tipo_de_instrumento e `instrumento_bancario`. Permite responder qué bancos concentran más exposición, "
-        "qué instrumentos explican la exposición y cómo cambia en el tiempo. Cálculo siempre neto."
+        "Esta sección está organizada como informe navegable con pocos filtros. Cruza banco normalizado, origen del banco, AFP, fondo, "
+        "bucket de cartera, tipo de instrumento e instrumento bancario. Cálculo siempre neto."
     )
 
     if bank_fact.empty:
         st.info("No hay fact de contrapartes bancarias procesada.")
     else:
-        bank_period_all = bank_fact[(bank_fact["fecha"].ge(start_date)) & (bank_fact["fecha"].le(end_date))].copy()
-        bank_date_all = bank_fact[bank_fact["fecha"].eq(selected_date)].copy()
-
-        # Filtros de análisis
-        f1, f2, f3, f4 = st.columns([1.1, 1.2, 1.4, 1.4])
-        with f1:
-            origen_banco_sel = st.selectbox(
-                "Tipo de banco",
-                ["Todos", "Bancos nacionales", "Bancos extranjeros"],
-                index=0,
-                key="bank_origen_v16",
-            )
-        with f2:
-            afp_opts = ["Todas"] + sorted([x for x in bank_date_all["afp_nombre"].dropna().unique() if str(x).strip()])
-            afp_bank_sel = st.selectbox("AFP", afp_opts, key="bank_afp_v16")
-        with f3:
-            bucket_opts_bank = ["Todos"] + [b for b in BUCKET_ORDER if b in set(bank_date_all["bucket_reporte"].dropna())]
-            bucket_bank_sel = st.selectbox("Bucket de cartera", bucket_opts_bank, key="bank_bucket_v16")
-        with f4:
-            inst_opts = ["Todos"] + [x for x in BANK_INSTR_ORDER if x in set(bank_date_all["instrumento_bancario"].dropna())]
-            inst_bank_sel = st.selectbox("Tipo de instrumento bancario", inst_opts, key="bank_inst_v16")
-
-        bank_date = bank_date_all.copy()
-        bank_period = bank_period_all.copy()
-
-        if origen_banco_sel == "Bancos nacionales":
-            bank_date = bank_date[bank_date["origen_banco"].eq("Nacional")]
-            bank_period = bank_period[bank_period["origen_banco"].eq("Nacional")]
-        elif origen_banco_sel == "Bancos extranjeros":
-            bank_date = bank_date[bank_date["origen_banco"].eq("Extranjero")]
-            bank_period = bank_period[bank_period["origen_banco"].eq("Extranjero")]
-
-        if afp_bank_sel != "Todas":
-            bank_date = bank_date[bank_date["afp_nombre"].eq(afp_bank_sel)]
-            bank_period = bank_period[bank_period["afp_nombre"].eq(afp_bank_sel)]
-        if bucket_bank_sel != "Todos":
-            bank_date = bank_date[bank_date["bucket_reporte"].eq(bucket_bank_sel)]
-            bank_period = bank_period[bank_period["bucket_reporte"].eq(bucket_bank_sel)]
-        if inst_bank_sel != "Todos":
-            bank_date = bank_date[bank_date["instrumento_bancario"].eq(inst_bank_sel)]
-            bank_period = bank_period[bank_period["instrumento_bancario"].eq(inst_bank_sel)]
+        bank_period = bank_fact[(bank_fact["fecha"].ge(start_date)) & (bank_fact["fecha"].le(end_date))].copy()
+        bank_date = bank_fact[bank_fact["fecha"].eq(selected_date)].copy()
 
         if bank_date.empty:
-            st.warning("No hay contrapartes bancarias para los filtros seleccionados.")
+            st.warning("No hay contrapartes bancarias para la fecha seleccionada.")
         else:
-            total_bancos_fecha = bank_date[VALUE_COL].sum()
-            n_bancos_fecha = bank_date["banco_nombre"].nunique()
-            n_codigos_fecha = bank_date["tipo_de_instrumento"].nunique()
-            bmet1, bmet2, bmet3 = st.columns(3)
-            bmet1.metric("Exposición bancaria neta", fmt_mm_clp_from_clp(total_bancos_fecha, 0))
-            bmet2.metric("Bancos presentes", f"{n_bancos_fecha:,}".replace(",", "."))
-            bmet3.metric("Códigos de instrumento", f"{n_codigos_fecha:,}".replace(",", "."))
-
-            top_n = st.slider("Top bancos a mostrar", 5, 30, 12, 1, key="top_banks_v16")
-            top_banks = (
-                bank_date.groupby(["banco_nombre", "origen_banco"], as_index=False)
-                .agg(**{VALUE_COL: (VALUE_COL, "sum"), "n_registros": ("n_registros", "sum")})
-            )
-            top_banks = add_pct(top_banks, VALUE_COL)
-            top_banks = top_banks.sort_values(VALUE_COL, ascending=False).head(top_n)
-            x_bank, x_bank_label = display_axis(display_mode, "% de contrapartes bancarias")
-            fig_bank = px.bar(
-                top_banks.sort_values(x_bank),
-                x=x_bank,
-                y="banco_nombre",
-                color="origen_banco",
-                orientation="h",
-                text=add_display_label(top_banks.sort_values(x_bank), display_mode, VALUE_COL)["display_label"],
-                title=f"Top contrapartes bancarias netas - {selected_date:%Y-%m-%d} ({chart_title_suffix(display_mode)})",
-                labels={x_bank: x_bank_label, "banco_nombre": "Banco", "origen_banco": "Origen", "monto_mm_clp": "MM$", "pct_pp": "%"},
-                hover_data={"pct_pp": ":.2f", "monto_mm_clp": ":,.0f", "n_registros": ":,.0f"},
-            )
-            fig_bank.update_layout(height=570, yaxis_title="", xaxis_title=x_bank_label)
-            apply_cmf_layout(fig_bank, height=570)
-            st.plotly_chart(fig_bank, use_container_width=True)
-            download_button(top_banks, "Descargar ranking bancos", "contrapartes_ranking_bancos_v16.csv", key="dl_bank_top_v16")
-
-            st.markdown("#### Matriz AFP × banco")
-            st.caption("Lectura sugerida: qué AFP explica la exposición a cada banco y qué bancos son relevantes para cada AFP.")
-            afp_bank = (
-                bank_date[bank_date["banco_nombre"].isin(top_banks["banco_nombre"])]
-                .groupby(["afp_nombre", "banco_nombre"], as_index=False)
-                .agg(**{VALUE_COL: (VALUE_COL, "sum")})
-            )
-            afp_bank = add_pct(afp_bank, VALUE_COL, ["afp_nombre"])
-            y_afp_bank, y_afp_bank_label = display_axis(display_mode, "% de cada AFP")
-            fig_afp_bank = px.bar(
-                afp_bank,
-                x="afp_nombre",
-                y=y_afp_bank,
-                color="banco_nombre",
-                title=f"AFP × banco ({chart_title_suffix(display_mode)})",
-                labels={"afp_nombre": "AFP", y_afp_bank: y_afp_bank_label, "banco_nombre": "Banco", "monto_mm_clp": "MM$", "pct_pp": "%"},
-                hover_data={"pct_pp": ":.2f", "monto_mm_clp": ":,.0f"},
-            )
-            fig_afp_bank.update_layout(height=620, yaxis_title=y_afp_bank_label)
-            apply_cmf_layout(fig_afp_bank, height=620)
-            st.plotly_chart(fig_afp_bank, use_container_width=True)
-            download_button(afp_bank, "Descargar matriz AFP × banco", "contrapartes_afp_banco_v16.csv", key="dl_afp_bank_v16")
-
-            st.markdown("#### Banco × instrumento")
-            cbi1, cbi2 = st.columns([1.2, 1])
-            with cbi1:
-                banco_opts = ["Top bancos"] + sorted([x for x in bank_date["banco_nombre"].dropna().unique() if str(x).strip()])
-                banco_sel = st.selectbox("Banco a abrir", banco_opts, key="bank_open_v16")
-            with cbi2:
-                nivel_inst_banco = st.selectbox(
-                    "Nivel de apertura",
-                    ["Tipo de instrumento bancario", "Código de instrumento", "Bucket de cartera", "Fondo", "AFP"],
-                    key="bank_open_level_v16",
-                )
-
-            bank_open = bank_date.copy()
-            if banco_sel == "Top bancos":
-                bank_open = bank_open[bank_open["banco_nombre"].isin(top_banks["banco_nombre"])]
-                group_col_bank = "banco_nombre"
-            else:
-                bank_open = bank_open[bank_open["banco_nombre"].eq(banco_sel)]
-                group_col_bank = {
-                    "Tipo de instrumento bancario": "instrumento_bancario",
-                    "Código de instrumento": "tipo_de_instrumento",
-                    "Bucket de cartera": "bucket_reporte",
-                    "Fondo": "tipo_de_fondo",
-                    "AFP": "afp_nombre",
-                }[nivel_inst_banco]
-
-            if banco_sel == "Top bancos":
-                banco_inst = (
-                    bank_open.groupby(["banco_nombre", "instrumento_bancario"], as_index=False)
-                    .agg(**{VALUE_COL: (VALUE_COL, "sum")})
-                )
-                banco_inst = add_pct(banco_inst, VALUE_COL, ["banco_nombre"])
-                y_banco_inst, y_banco_inst_label = display_axis(display_mode, "% de cada banco")
-                fig_banco_inst = px.bar(
-                    banco_inst,
-                    x="banco_nombre",
-                    y=y_banco_inst,
-                    color="instrumento_bancario",
-                    title=f"Top bancos abiertos por instrumento bancario ({chart_title_suffix(display_mode)})",
-                    labels={"banco_nombre": "Banco", y_banco_inst: y_banco_inst_label, "instrumento_bancario": "Instrumento", "monto_mm_clp": "MM$", "pct_pp": "%"},
-                    hover_data={"pct_pp": ":.2f", "monto_mm_clp": ":,.0f"},
-                )
-                table_bank_open = banco_inst.copy()
-            else:
-                banco_inst = (
-                    bank_open.groupby([group_col_bank], as_index=False)
+            # Helpers locales para evitar muchos filtros y mantener performance.
+            def _bank_top(df_in: pd.DataFrame, n: int = 15, only_origin: str | None = None) -> pd.DataFrame:
+                d = df_in.copy()
+                if only_origin:
+                    d = d[d["origen_banco"].eq(only_origin)]
+                if d.empty:
+                    return pd.DataFrame()
+                out = (
+                    d.groupby(["banco_nombre", "origen_banco"], as_index=False)
                     .agg(**{VALUE_COL: (VALUE_COL, "sum"), "n_registros": ("n_registros", "sum")})
-                    .sort_values(VALUE_COL, ascending=False)
-                    .head(30)
                 )
-                banco_inst = add_pct(banco_inst, VALUE_COL)
-                banco_inst = add_display_label(banco_inst, display_mode, VALUE_COL)
-                y_banco_inst, y_banco_inst_label = display_axis(display_mode, "% del banco")
-                fig_banco_inst = px.bar(
-                    banco_inst.sort_values(y_banco_inst),
-                    x=y_banco_inst,
-                    y=group_col_bank,
+                out = add_pct(out, VALUE_COL)
+                out = out.sort_values(VALUE_COL, ascending=False).head(n)
+                return add_display_label(out, display_mode, VALUE_COL)
+
+            def _plot_top_banks(df_top: pd.DataFrame, title: str, key_suffix: str):
+                if df_top.empty:
+                    st.info("Sin datos para esta apertura.")
+                    return
+                x_col, x_label = display_axis(display_mode, "% contrapartes bancarias")
+                fig = px.bar(
+                    df_top.sort_values(x_col),
+                    x=x_col,
+                    y="banco_nombre",
+                    color="origen_banco",
                     orientation="h",
                     text="display_label",
-                    title=f"{banco_sel}: apertura por {nivel_inst_banco.lower()} ({chart_title_suffix(display_mode)})",
-                    labels={group_col_bank: "Apertura", y_banco_inst: y_banco_inst_label, "monto_mm_clp": "MM$", "pct_pp": "%"},
+                    title=f"{title} ({chart_title_suffix(display_mode)})",
+                    labels={x_col: x_label, "banco_nombre": "Banco", "origen_banco": "Origen", "monto_mm_clp": "MM$", "pct_pp": "%"},
                     hover_data={"pct_pp": ":.2f", "monto_mm_clp": ":,.0f", "n_registros": ":,.0f"},
                 )
-                table_bank_open = banco_inst.copy()
+                fig.update_layout(height=560, yaxis_title="", xaxis_title=x_label)
+                apply_cmf_layout(fig, height=560)
+                st.plotly_chart(fig, use_container_width=True)
+                download_button(df_top, f"Descargar {title.lower()}", f"contrapartes_{key_suffix}_v17.csv", key=f"dl_{key_suffix}_v17")
 
-            fig_banco_inst.update_layout(height=620, yaxis_title="", xaxis_title=y_banco_inst_label)
-            apply_cmf_layout(fig_banco_inst, height=620)
-            st.plotly_chart(fig_banco_inst, use_container_width=True)
+            total_bancos_fecha = bank_date[VALUE_COL].sum()
+            total_bancos_periodo = bank_period[VALUE_COL].sum()
+            n_bancos_fecha = bank_date["banco_nombre"].nunique()
+            n_inst_fecha = bank_date["tipo_de_instrumento"].nunique()
+            nac_monto = bank_date.loc[bank_date["origen_banco"].eq("Nacional"), VALUE_COL].sum()
+            ext_monto = bank_date.loc[bank_date["origen_banco"].eq("Extranjero"), VALUE_COL].sum()
 
-            with st.expander("Ver tabla de apertura banco × instrumento", expanded=False):
-                tbl = table_bank_open.copy()
-                if "monto_mm_clp" not in tbl.columns and VALUE_COL in tbl.columns:
-                    tbl["monto_mm_clp"] = tbl[VALUE_COL] / 1_000_000
-                if "pct_pp" not in tbl.columns:
-                    tbl = add_pct(tbl, VALUE_COL)
-                tbl["MM$"] = tbl["monto_mm_clp"].map(lambda x: fmt_num_chile(x, 0))
-                tbl["%"] = tbl["pct_pp"].map(lambda x: fmt_pct_num(x, 2))
-                show_cols = [c for c in ["banco_nombre", "instrumento_bancario", "tipo_de_instrumento", "bucket_reporte", "tipo_de_fondo", "afp_nombre", "MM$", "%", "n_registros"] if c in tbl.columns]
-                st.dataframe(tbl[show_cols], hide_index=True, use_container_width=True, height=420)
-            download_button(table_bank_open, "Descargar apertura banco × instrumento", "contrapartes_banco_instrumento_v16.csv", key="dl_banco_inst_v16")
+            m1, m2, m3, m4 = st.columns(4)
+            m1.metric("Exposición bancaria neta", fmt_mm_clp_from_clp(total_bancos_fecha, 0))
+            m2.metric("Bancos presentes", f"{n_bancos_fecha:,}".replace(",", "."))
+            m3.metric("Códigos de instrumento", f"{n_inst_fecha:,}".replace(",", "."))
+            share_nac = nac_monto / total_bancos_fecha * 100 if total_bancos_fecha else np.nan
+            m4.metric("Bancos nacionales", "-" if pd.isna(share_nac) else f"{share_nac:.1f}%".replace(".", ","))
 
-            st.markdown("#### Evolutivo de concentración bancaria")
-            ce1, ce2, ce3 = st.columns([1.1, 1.1, 1.2])
-            with ce1:
-                evo_dim = st.selectbox(
-                    "Serie evolutiva",
-                    ["Banco", "Instrumento bancario", "Bucket de cartera", "AFP", "Fondo"],
-                    key="bank_evo_dim_v16",
-                )
-            with ce2:
-                top_evo = st.slider("Series evolutivas", 3, 15, 8, 1, key="bank_top_evo_v16")
-            with ce3:
-                denom_evo_bank = st.selectbox(
-                    "Denominador %",
-                    ["Total bancario filtrado", "Total sistema"],
-                    key="bank_denom_evo_v16",
-                )
-
-            evo_col_map = {
-                "Banco": "banco_nombre",
-                "Instrumento bancario": "instrumento_bancario",
-                "Bucket de cartera": "bucket_reporte",
-                "AFP": "afp_nombre",
-                "Fondo": "tipo_de_fondo",
-            }
-            evo_col = evo_col_map[evo_dim]
-            evo_bank = bank_period.groupby(["fecha", evo_col], as_index=False).agg(**{VALUE_COL: (VALUE_COL, "sum")})
-            if denom_evo_bank == "Total sistema":
-                den = period.groupby("fecha", as_index=False)[VALUE_COL].sum().rename(columns={VALUE_COL: "total"})
-            else:
-                den = bank_period.groupby("fecha", as_index=False)[VALUE_COL].sum().rename(columns={VALUE_COL: "total"})
-            evo_bank = evo_bank.merge(den, on="fecha", how="left")
-            evo_bank["pct_pp"] = np.where(evo_bank["total"].abs() > 0, evo_bank[VALUE_COL] / evo_bank["total"] * 100, np.nan)
-            evo_bank["monto_mm_clp"] = evo_bank[VALUE_COL] / 1_000_000
-            top_series = (
-                bank_date.groupby(evo_col)[VALUE_COL].sum().abs().sort_values(ascending=False).head(top_evo).index.tolist()
+            btab_resumen, btab_nac, btab_ext, btab_afp, btab_inst, btab_evo = st.tabs(
+                [
+                    "Resumen sistema",
+                    "Bancos nacionales",
+                    "Bancos extranjeros",
+                    "Por AFP",
+                    "Banco × instrumento",
+                    "Evolutivos",
+                ]
             )
-            evo_bank = evo_bank[evo_bank[evo_col].isin(top_series)]
-            y_evo_bank, y_evo_bank_label = display_axis(display_mode, "% bancario" if denom_evo_bank == "Total bancario filtrado" else "% sistema")
-            fig_evo_bank = px.line(
-                evo_bank,
-                x="fecha",
-                y=y_evo_bank,
-                color=evo_col,
-                title=f"Evolución por {evo_dim.lower()} ({chart_title_suffix(display_mode)})",
-                labels={"fecha": "Fecha", y_evo_bank: y_evo_bank_label, evo_col: evo_dim, "monto_mm_clp": "MM$", "pct_pp": "%"},
-                hover_data={"pct_pp": ":.2f", "monto_mm_clp": ":,.0f"},
-            )
-            fig_evo_bank.update_layout(height=650, yaxis_title=y_evo_bank_label)
-            apply_cmf_layout(fig_evo_bank, height=650)
-            st.plotly_chart(fig_evo_bank, use_container_width=True)
-            download_button(evo_bank, "Descargar evolutivo bancario", "contrapartes_bancarias_evolutivo_v16.csv", key="dl_bank_evo_v16")
 
-            st.markdown("#### Tabla resumen granular")
-            st.caption("Tabla pensada para auditoría del gráfico: banco, AFP, fondo, bucket, instrumento y código.")
-            granular = (
-                bank_date.groupby(["banco_nombre", "afp_nombre", "tipo_de_fondo", "bucket_reporte", "instrumento_bancario", "tipo_de_instrumento"], as_index=False)
-                .agg(**{VALUE_COL: (VALUE_COL, "sum"), "n_registros": ("n_registros", "sum")})
-                .sort_values(VALUE_COL, ascending=False)
-            )
-            granular = add_pct(granular, VALUE_COL)
-            granular["MM$"] = granular["monto_mm_clp"].map(lambda x: fmt_num_chile(x, 0))
-            granular["%"] = granular["pct_pp"].map(lambda x: fmt_pct_num(x, 2))
-            with st.expander("Ver tabla granular de contraparte bancaria", expanded=False):
-                st.dataframe(
-                    granular[["banco_nombre", "afp_nombre", "tipo_de_fondo", "bucket_reporte", "instrumento_bancario", "tipo_de_instrumento", "MM$", "%", "n_registros"]].head(250),
-                    hide_index=True,
-                    use_container_width=True,
-                    height=520,
+            with btab_resumen:
+                st.markdown("#### Resumen bancario total")
+                st.caption("Lectura directa de concentración: primero sistema total, luego separación nacional/extranjero.")
+
+                origen_bank = (
+                    bank_date.groupby("origen_banco", as_index=False)
+                    .agg(**{VALUE_COL: (VALUE_COL, "sum"), "n_registros": ("n_registros", "sum")})
                 )
-            download_button(granular, "Descargar tabla granular bancaria", "contrapartes_bancarias_granular_v16.csv", key="dl_bank_granular_v16")
+                origen_bank = add_pct(origen_bank, VALUE_COL)
+                origen_bank = add_display_label(origen_bank, display_mode, VALUE_COL)
+                x_origen, x_origen_label = display_axis(display_mode, "% bancario")
+                fig_origen_bank = px.bar(
+                    origen_bank.sort_values(x_origen),
+                    x=x_origen,
+                    y="origen_banco",
+                    color="origen_banco",
+                    orientation="h",
+                    text="display_label",
+                    title=f"Bancos nacionales vs extranjeros - {selected_date:%Y-%m-%d} ({chart_title_suffix(display_mode)})",
+                    labels={x_origen: x_origen_label, "origen_banco": "Origen", "monto_mm_clp": "MM$", "pct_pp": "%"},
+                    hover_data={"pct_pp": ":.2f", "monto_mm_clp": ":,.0f", "n_registros": ":,.0f"},
+                )
+                fig_origen_bank.update_layout(height=330, yaxis_title="", xaxis_title=x_origen_label, showlegend=False)
+                apply_cmf_layout(fig_origen_bank, height=330)
+                st.plotly_chart(fig_origen_bank, use_container_width=True)
+                download_button(origen_bank, "Descargar nacional vs extranjero", "contrapartes_origen_banco_v17.csv", key="dl_bank_origen_v17")
+
+                top_all = _bank_top(bank_date, n=18)
+                _plot_top_banks(top_all, f"Top contrapartes bancarias netas - {selected_date:%Y-%m-%d}", "ranking_bancos_total")
+
+                st.markdown("#### Matriz AFP × banco")
+                st.caption("Para leer dependencia cruzada: qué AFP tiene más exposición a cada banco dentro de los principales bancos del sistema.")
+                top_names = top_all["banco_nombre"].head(12).tolist() if not top_all.empty else []
+                afp_bank = (
+                    bank_date[bank_date["banco_nombre"].isin(top_names)]
+                    .groupby(["afp_nombre", "banco_nombre"], as_index=False)
+                    .agg(**{VALUE_COL: (VALUE_COL, "sum")})
+                )
+                if len(afp_bank):
+                    afp_bank = add_pct(afp_bank, VALUE_COL, ["afp_nombre"])
+                    y_afp_bank, y_afp_bank_label = display_axis(display_mode, "% de cada AFP")
+                    fig_afp_bank = px.bar(
+                        afp_bank,
+                        x="afp_nombre",
+                        y=y_afp_bank,
+                        color="banco_nombre",
+                        title=f"AFP × banco - Top 12 bancos ({chart_title_suffix(display_mode)})",
+                        labels={"afp_nombre": "AFP", y_afp_bank: y_afp_bank_label, "banco_nombre": "Banco", "monto_mm_clp": "MM$", "pct_pp": "%"},
+                        hover_data={"pct_pp": ":.2f", "monto_mm_clp": ":,.0f"},
+                    )
+                    fig_afp_bank.update_layout(height=610, yaxis_title=y_afp_bank_label)
+                    apply_cmf_layout(fig_afp_bank, height=610)
+                    st.plotly_chart(fig_afp_bank, use_container_width=True)
+                    download_button(afp_bank, "Descargar AFP × banco", "contrapartes_afp_banco_v17.csv", key="dl_afp_bank_v17")
+
+            with btab_nac:
+                st.markdown("#### Bancos nacionales")
+                st.caption("Vista fija para bancos chilenos: ranking, apertura por instrumento y evolución agregada.")
+                bank_nac_date = bank_date[bank_date["origen_banco"].eq("Nacional")].copy()
+                bank_nac_period = bank_period[bank_period["origen_banco"].eq("Nacional")].copy()
+                top_nac = _bank_top(bank_date, n=15, only_origin="Nacional")
+                _plot_top_banks(top_nac, f"Top bancos nacionales - {selected_date:%Y-%m-%d}", "ranking_bancos_nacionales")
+
+                if len(bank_nac_date):
+                    inst_nac = (
+                        bank_nac_date.groupby("instrumento_bancario", as_index=False)
+                        .agg(**{VALUE_COL: (VALUE_COL, "sum"), "n_registros": ("n_registros", "sum")})
+                    )
+                    inst_nac = add_pct(inst_nac, VALUE_COL)
+                    inst_nac = add_display_label(inst_nac, display_mode, VALUE_COL)
+                    y_inst_nac, y_inst_nac_label = display_axis(display_mode, "% bancos nacionales")
+                    fig_inst_nac = px.bar(
+                        inst_nac.sort_values(y_inst_nac),
+                        x=y_inst_nac,
+                        y="instrumento_bancario",
+                        orientation="h",
+                        text="display_label",
+                        title=f"Bancos nacionales por tipo de instrumento ({chart_title_suffix(display_mode)})",
+                        labels={y_inst_nac: y_inst_nac_label, "instrumento_bancario": "Instrumento", "monto_mm_clp": "MM$", "pct_pp": "%"},
+                        hover_data={"pct_pp": ":.2f", "monto_mm_clp": ":,.0f", "n_registros": ":,.0f"},
+                    )
+                    fig_inst_nac.update_layout(height=500, yaxis_title="", xaxis_title=y_inst_nac_label)
+                    apply_cmf_layout(fig_inst_nac, height=500)
+                    st.plotly_chart(fig_inst_nac, use_container_width=True)
+                    download_button(inst_nac, "Descargar instrumentos bancos nacionales", "contrapartes_nacionales_instrumento_v17.csv", key="dl_inst_nac_v17")
+
+                    evo_nac = (
+                        bank_nac_period.groupby(["fecha", "banco_nombre"], as_index=False)
+                        .agg(**{VALUE_COL: (VALUE_COL, "sum")})
+                    )
+                    den_nac = bank_nac_period.groupby("fecha", as_index=False)[VALUE_COL].sum().rename(columns={VALUE_COL: "total"})
+                    evo_nac = evo_nac.merge(den_nac, on="fecha", how="left")
+                    evo_nac["pct_pp"] = np.where(evo_nac["total"].abs() > 0, evo_nac[VALUE_COL] / evo_nac["total"] * 100, np.nan)
+                    evo_nac["monto_mm_clp"] = evo_nac[VALUE_COL] / 1_000_000
+                    top_nac_names = top_nac["banco_nombre"].head(8).tolist() if not top_nac.empty else []
+                    evo_nac = evo_nac[evo_nac["banco_nombre"].isin(top_nac_names)]
+                    y_evo_nac, y_evo_nac_label = display_axis(display_mode, "% bancos nacionales")
+                    fig_evo_nac = px.line(
+                        evo_nac,
+                        x="fecha",
+                        y=y_evo_nac,
+                        color="banco_nombre",
+                        title=f"Evolución top bancos nacionales ({chart_title_suffix(display_mode)})",
+                        labels={"fecha": "Fecha", y_evo_nac: y_evo_nac_label, "banco_nombre": "Banco", "monto_mm_clp": "MM$", "pct_pp": "%"},
+                        hover_data={"pct_pp": ":.2f", "monto_mm_clp": ":,.0f"},
+                    )
+                    fig_evo_nac.update_layout(height=610, yaxis_title=y_evo_nac_label)
+                    apply_cmf_layout(fig_evo_nac, height=610)
+                    st.plotly_chart(fig_evo_nac, use_container_width=True)
+                    download_button(evo_nac, "Descargar evolución bancos nacionales", "contrapartes_nacionales_evolutivo_v17.csv", key="dl_evo_nac_v17")
+
+            with btab_ext:
+                st.markdown("#### Bancos extranjeros")
+                st.caption("Vista fija para bancos extranjeros: ranking, apertura por instrumento y evolución agregada.")
+                bank_ext_date = bank_date[bank_date["origen_banco"].eq("Extranjero")].copy()
+                bank_ext_period = bank_period[bank_period["origen_banco"].eq("Extranjero")].copy()
+                top_ext = _bank_top(bank_date, n=15, only_origin="Extranjero")
+                _plot_top_banks(top_ext, f"Top bancos extranjeros - {selected_date:%Y-%m-%d}", "ranking_bancos_extranjeros")
+
+                if len(bank_ext_date):
+                    inst_ext = (
+                        bank_ext_date.groupby("instrumento_bancario", as_index=False)
+                        .agg(**{VALUE_COL: (VALUE_COL, "sum"), "n_registros": ("n_registros", "sum")})
+                    )
+                    inst_ext = add_pct(inst_ext, VALUE_COL)
+                    inst_ext = add_display_label(inst_ext, display_mode, VALUE_COL)
+                    y_inst_ext, y_inst_ext_label = display_axis(display_mode, "% bancos extranjeros")
+                    fig_inst_ext = px.bar(
+                        inst_ext.sort_values(y_inst_ext),
+                        x=y_inst_ext,
+                        y="instrumento_bancario",
+                        orientation="h",
+                        text="display_label",
+                        title=f"Bancos extranjeros por tipo de instrumento ({chart_title_suffix(display_mode)})",
+                        labels={y_inst_ext: y_inst_ext_label, "instrumento_bancario": "Instrumento", "monto_mm_clp": "MM$", "pct_pp": "%"},
+                        hover_data={"pct_pp": ":.2f", "monto_mm_clp": ":,.0f", "n_registros": ":,.0f"},
+                    )
+                    fig_inst_ext.update_layout(height=500, yaxis_title="", xaxis_title=y_inst_ext_label)
+                    apply_cmf_layout(fig_inst_ext, height=500)
+                    st.plotly_chart(fig_inst_ext, use_container_width=True)
+                    download_button(inst_ext, "Descargar instrumentos bancos extranjeros", "contrapartes_extranjeros_instrumento_v17.csv", key="dl_inst_ext_v17")
+
+                    evo_ext = (
+                        bank_ext_period.groupby(["fecha", "banco_nombre"], as_index=False)
+                        .agg(**{VALUE_COL: (VALUE_COL, "sum")})
+                    )
+                    den_ext = bank_ext_period.groupby("fecha", as_index=False)[VALUE_COL].sum().rename(columns={VALUE_COL: "total"})
+                    evo_ext = evo_ext.merge(den_ext, on="fecha", how="left")
+                    evo_ext["pct_pp"] = np.where(evo_ext["total"].abs() > 0, evo_ext[VALUE_COL] / evo_ext["total"] * 100, np.nan)
+                    evo_ext["monto_mm_clp"] = evo_ext[VALUE_COL] / 1_000_000
+                    top_ext_names = top_ext["banco_nombre"].head(8).tolist() if not top_ext.empty else []
+                    evo_ext = evo_ext[evo_ext["banco_nombre"].isin(top_ext_names)]
+                    y_evo_ext, y_evo_ext_label = display_axis(display_mode, "% bancos extranjeros")
+                    fig_evo_ext = px.line(
+                        evo_ext,
+                        x="fecha",
+                        y=y_evo_ext,
+                        color="banco_nombre",
+                        title=f"Evolución top bancos extranjeros ({chart_title_suffix(display_mode)})",
+                        labels={"fecha": "Fecha", y_evo_ext: y_evo_ext_label, "banco_nombre": "Banco", "monto_mm_clp": "MM$", "pct_pp": "%"},
+                        hover_data={"pct_pp": ":.2f", "monto_mm_clp": ":,.0f"},
+                    )
+                    fig_evo_ext.update_layout(height=610, yaxis_title=y_evo_ext_label)
+                    apply_cmf_layout(fig_evo_ext, height=610)
+                    st.plotly_chart(fig_evo_ext, use_container_width=True)
+                    download_button(evo_ext, "Descargar evolución bancos extranjeros", "contrapartes_extranjeros_evolutivo_v17.csv", key="dl_evo_ext_v17")
+
+            with btab_afp:
+                st.markdown("#### Apertura por AFP")
+                st.caption("Un solo selector: abre la AFP y muestra bancos, origen e instrumentos. Evita recalcular muchas combinaciones manuales.")
+                afp_opts = sorted([x for x in bank_date["afp_nombre"].dropna().unique() if str(x).strip()])
+                if afp_opts:
+                    afp_sel = st.selectbox("AFP a revisar", afp_opts, key="bank_afp_simple_v17")
+                    afp_d = bank_date[bank_date["afp_nombre"].eq(afp_sel)].copy()
+                    afp_p = bank_period[bank_period["afp_nombre"].eq(afp_sel)].copy()
+                    st.metric(f"Exposición bancaria {afp_sel}", fmt_mm_clp_from_clp(afp_d[VALUE_COL].sum(), 0))
+                    afp_top = _bank_top(afp_d, n=12)
+                    _plot_top_banks(afp_top, f"{afp_sel}: top bancos", "afp_top_bancos")
+
+                    c_afp1, c_afp2 = st.columns(2)
+                    with c_afp1:
+                        afp_origin = afp_d.groupby("origen_banco", as_index=False).agg(**{VALUE_COL: (VALUE_COL, "sum")})
+                        afp_origin = add_pct(afp_origin, VALUE_COL)
+                        afp_origin = add_display_label(afp_origin, display_mode, VALUE_COL)
+                        y_ao, y_ao_label = display_axis(display_mode, "% AFP")
+                        fig_ao = px.bar(
+                            afp_origin.sort_values(y_ao),
+                            x=y_ao,
+                            y="origen_banco",
+                            color="origen_banco",
+                            orientation="h",
+                            text="display_label",
+                            title=f"{afp_sel}: banco nacional vs extranjero ({chart_title_suffix(display_mode)})",
+                            labels={y_ao: y_ao_label, "origen_banco": "Origen", "monto_mm_clp": "MM$", "pct_pp": "%"},
+                        )
+                        apply_cmf_layout(fig_ao, height=390)
+                        st.plotly_chart(fig_ao, use_container_width=True)
+                    with c_afp2:
+                        afp_inst = afp_d.groupby("instrumento_bancario", as_index=False).agg(**{VALUE_COL: (VALUE_COL, "sum")})
+                        afp_inst = add_pct(afp_inst, VALUE_COL)
+                        afp_inst = add_display_label(afp_inst, display_mode, VALUE_COL)
+                        y_ai, y_ai_label = display_axis(display_mode, "% AFP")
+                        fig_ai = px.bar(
+                            afp_inst.sort_values(y_ai),
+                            x=y_ai,
+                            y="instrumento_bancario",
+                            orientation="h",
+                            text="display_label",
+                            title=f"{afp_sel}: apertura por instrumento ({chart_title_suffix(display_mode)})",
+                            labels={y_ai: y_ai_label, "instrumento_bancario": "Instrumento", "monto_mm_clp": "MM$", "pct_pp": "%"},
+                        )
+                        apply_cmf_layout(fig_ai, height=390)
+                        st.plotly_chart(fig_ai, use_container_width=True)
+
+                    evo_afp = afp_p.groupby(["fecha", "origen_banco"], as_index=False).agg(**{VALUE_COL: (VALUE_COL, "sum")})
+                    den_afp = afp_p.groupby("fecha", as_index=False)[VALUE_COL].sum().rename(columns={VALUE_COL: "total"})
+                    evo_afp = evo_afp.merge(den_afp, on="fecha", how="left")
+                    evo_afp["pct_pp"] = np.where(evo_afp["total"].abs() > 0, evo_afp[VALUE_COL] / evo_afp["total"] * 100, np.nan)
+                    evo_afp["monto_mm_clp"] = evo_afp[VALUE_COL] / 1_000_000
+                    y_eafp, y_eafp_label = display_axis(display_mode, "% AFP")
+                    fig_eafp = px.line(
+                        evo_afp,
+                        x="fecha",
+                        y=y_eafp,
+                        color="origen_banco",
+                        title=f"{afp_sel}: evolución bancario nacional vs extranjero ({chart_title_suffix(display_mode)})",
+                        labels={"fecha": "Fecha", y_eafp: y_eafp_label, "origen_banco": "Origen", "monto_mm_clp": "MM$", "pct_pp": "%"},
+                    )
+                    apply_cmf_layout(fig_eafp, height=560)
+                    st.plotly_chart(fig_eafp, use_container_width=True)
+
+                    afp_tbl = (
+                        afp_d.groupby(["banco_nombre", "origen_banco", "instrumento_bancario", "tipo_de_instrumento", "bucket_reporte", "tipo_de_fondo"], as_index=False)
+                        .agg(**{VALUE_COL: (VALUE_COL, "sum"), "n_registros": ("n_registros", "sum")})
+                        .sort_values(VALUE_COL, ascending=False)
+                    )
+                    download_button(afp_tbl, f"Descargar detalle {afp_sel}", f"contrapartes_{afp_sel}_detalle_v17.csv", key="dl_afp_detalle_v17")
+
+            with btab_inst:
+                st.markdown("#### Banco × instrumento")
+                st.caption("Vista directa: los principales bancos abiertos por instrumento y una apertura opcional de un banco específico.")
+                top_all = _bank_top(bank_date, n=12)
+                top_names = top_all["banco_nombre"].tolist() if not top_all.empty else []
+                top_inst = (
+                    bank_date[bank_date["banco_nombre"].isin(top_names)]
+                    .groupby(["banco_nombre", "instrumento_bancario"], as_index=False)
+                    .agg(**{VALUE_COL: (VALUE_COL, "sum")})
+                )
+                if len(top_inst):
+                    top_inst = add_pct(top_inst, VALUE_COL, ["banco_nombre"])
+                    y_ti, y_ti_label = display_axis(display_mode, "% de cada banco")
+                    fig_ti = px.bar(
+                        top_inst,
+                        x="banco_nombre",
+                        y=y_ti,
+                        color="instrumento_bancario",
+                        title=f"Top bancos abiertos por instrumento bancario ({chart_title_suffix(display_mode)})",
+                        labels={"banco_nombre": "Banco", y_ti: y_ti_label, "instrumento_bancario": "Instrumento", "monto_mm_clp": "MM$", "pct_pp": "%"},
+                        hover_data={"pct_pp": ":.2f", "monto_mm_clp": ":,.0f"},
+                    )
+                    fig_ti.update_layout(height=610, yaxis_title=y_ti_label)
+                    apply_cmf_layout(fig_ti, height=610)
+                    st.plotly_chart(fig_ti, use_container_width=True)
+                    download_button(top_inst, "Descargar top bancos por instrumento", "contrapartes_top_bancos_instrumento_v17.csv", key="dl_top_inst_v17")
+
+                banco_opts = sorted([x for x in bank_date["banco_nombre"].dropna().unique() if str(x).strip()])
+                if banco_opts:
+                    banco_sel = st.selectbox("Abrir banco específico", banco_opts, key="bank_open_simple_v17")
+                    bank_open = bank_date[bank_date["banco_nombre"].eq(banco_sel)].copy()
+                    open_tabs = st.tabs(["Tipo instrumento", "Código instrumento", "AFP", "Fondo", "Bucket"])
+                    open_dims = ["instrumento_bancario", "tipo_de_instrumento", "afp_nombre", "tipo_de_fondo", "bucket_reporte"]
+                    open_names = ["tipo de instrumento", "código de instrumento", "AFP", "fondo", "bucket"]
+                    for otab, dim, nm in zip(open_tabs, open_dims, open_names):
+                        with otab:
+                            d_open = bank_open.groupby(dim, as_index=False).agg(**{VALUE_COL: (VALUE_COL, "sum"), "n_registros": ("n_registros", "sum")})
+                            d_open = d_open.sort_values(VALUE_COL, ascending=False).head(25)
+                            d_open = add_pct(d_open, VALUE_COL)
+                            d_open = add_display_label(d_open, display_mode, VALUE_COL)
+                            y_o, y_o_label = display_axis(display_mode, "% del banco")
+                            fig_o = px.bar(
+                                d_open.sort_values(y_o),
+                                x=y_o,
+                                y=dim,
+                                orientation="h",
+                                text="display_label",
+                                title=f"{banco_sel}: apertura por {nm} ({chart_title_suffix(display_mode)})",
+                                labels={dim: "Apertura", y_o: y_o_label, "monto_mm_clp": "MM$", "pct_pp": "%"},
+                                hover_data={"pct_pp": ":.2f", "monto_mm_clp": ":,.0f", "n_registros": ":,.0f"},
+                            )
+                            apply_cmf_layout(fig_o, height=520)
+                            st.plotly_chart(fig_o, use_container_width=True)
+                            download_button(d_open, f"Descargar {banco_sel} por {nm}", f"contrapartes_{banco_sel}_{dim}_v17.csv", key=f"dl_{dim}_bank_open_v17")
+
+            with btab_evo:
+                st.markdown("#### Evolutivos bancarios")
+                st.caption("Evolutivos fijos para mirar tendencia sin depender de múltiples filtros.")
+
+                evo_origen = bank_period.groupby(["fecha", "origen_banco"], as_index=False).agg(**{VALUE_COL: (VALUE_COL, "sum")})
+                den_evo_total = bank_period.groupby("fecha", as_index=False)[VALUE_COL].sum().rename(columns={VALUE_COL: "total"})
+                evo_origen = evo_origen.merge(den_evo_total, on="fecha", how="left")
+                evo_origen["pct_pp"] = np.where(evo_origen["total"].abs() > 0, evo_origen[VALUE_COL] / evo_origen["total"] * 100, np.nan)
+                evo_origen["monto_mm_clp"] = evo_origen[VALUE_COL] / 1_000_000
+                y_eo, y_eo_label = display_axis(display_mode, "% bancario")
+                fig_eo = px.line(
+                    evo_origen,
+                    x="fecha",
+                    y=y_eo,
+                    color="origen_banco",
+                    title=f"Evolución bancos nacionales vs extranjeros ({chart_title_suffix(display_mode)})",
+                    labels={"fecha": "Fecha", y_eo: y_eo_label, "origen_banco": "Origen", "monto_mm_clp": "MM$", "pct_pp": "%"},
+                    hover_data={"pct_pp": ":.2f", "monto_mm_clp": ":,.0f"},
+                )
+                apply_cmf_layout(fig_eo, height=560)
+                st.plotly_chart(fig_eo, use_container_width=True)
+                download_button(evo_origen, "Descargar evolución nacional/extranjero", "contrapartes_evolutivo_origen_v17.csv", key="dl_evo_origen_v17")
+
+                evo_inst = bank_period.groupby(["fecha", "instrumento_bancario"], as_index=False).agg(**{VALUE_COL: (VALUE_COL, "sum")})
+                evo_inst = evo_inst.merge(den_evo_total, on="fecha", how="left")
+                evo_inst["pct_pp"] = np.where(evo_inst["total"].abs() > 0, evo_inst[VALUE_COL] / evo_inst["total"] * 100, np.nan)
+                evo_inst["monto_mm_clp"] = evo_inst[VALUE_COL] / 1_000_000
+                top_inst_names = bank_date.groupby("instrumento_bancario")[VALUE_COL].sum().abs().sort_values(ascending=False).head(8).index.tolist()
+                evo_inst = evo_inst[evo_inst["instrumento_bancario"].isin(top_inst_names)]
+                y_ei, y_ei_label = display_axis(display_mode, "% bancario")
+                fig_ei = px.line(
+                    evo_inst,
+                    x="fecha",
+                    y=y_ei,
+                    color="instrumento_bancario",
+                    title=f"Evolución por instrumento bancario ({chart_title_suffix(display_mode)})",
+                    labels={"fecha": "Fecha", y_ei: y_ei_label, "instrumento_bancario": "Instrumento", "monto_mm_clp": "MM$", "pct_pp": "%"},
+                    hover_data={"pct_pp": ":.2f", "monto_mm_clp": ":,.0f"},
+                )
+                apply_cmf_layout(fig_ei, height=560)
+                st.plotly_chart(fig_ei, use_container_width=True)
+                download_button(evo_inst, "Descargar evolución por instrumento", "contrapartes_evolutivo_instrumento_v17.csv", key="dl_evo_inst_v17")
+
+                top_all = _bank_top(bank_date, n=8)
+                top_names = top_all["banco_nombre"].tolist() if not top_all.empty else []
+                evo_banco = bank_period.groupby(["fecha", "banco_nombre"], as_index=False).agg(**{VALUE_COL: (VALUE_COL, "sum")})
+                evo_banco = evo_banco[evo_banco["banco_nombre"].isin(top_names)]
+                evo_banco = evo_banco.merge(den_evo_total, on="fecha", how="left")
+                evo_banco["pct_pp"] = np.where(evo_banco["total"].abs() > 0, evo_banco[VALUE_COL] / evo_banco["total"] * 100, np.nan)
+                evo_banco["monto_mm_clp"] = evo_banco[VALUE_COL] / 1_000_000
+                y_eb, y_eb_label = display_axis(display_mode, "% bancario")
+                fig_eb = px.line(
+                    evo_banco,
+                    x="fecha",
+                    y=y_eb,
+                    color="banco_nombre",
+                    title=f"Evolución top bancos sistema ({chart_title_suffix(display_mode)})",
+                    labels={"fecha": "Fecha", y_eb: y_eb_label, "banco_nombre": "Banco", "monto_mm_clp": "MM$", "pct_pp": "%"},
+                    hover_data={"pct_pp": ":.2f", "monto_mm_clp": ":,.0f"},
+                )
+                apply_cmf_layout(fig_eb, height=620)
+                st.plotly_chart(fig_eb, use_container_width=True)
+                download_button(evo_banco, "Descargar evolución top bancos", "contrapartes_evolutivo_top_bancos_v17.csv", key="dl_evo_banco_v17")
+
+                granular = (
+                    bank_date.groupby(["banco_nombre", "origen_banco", "afp_nombre", "tipo_de_fondo", "bucket_reporte", "instrumento_bancario", "tipo_de_instrumento"], as_index=False)
+                    .agg(**{VALUE_COL: (VALUE_COL, "sum"), "n_registros": ("n_registros", "sum")})
+                    .sort_values(VALUE_COL, ascending=False)
+                )
+                granular = add_pct(granular, VALUE_COL)
+                download_button(granular, "Descargar tabla granular bancaria", "contrapartes_bancarias_granular_v17.csv", key="dl_bank_granular_v17")
 
 
 with tab_aum:
@@ -2014,7 +2194,7 @@ with tab_aum:
         st.markdown("#### AUM por fondo para la fecha seleccionada")
         aum_fund_data, fig_aum_fund = chart_aum_by_fund(aum_date, selected_aum_date, display_mode)
         st.plotly_chart(fig_aum_fund, use_container_width=True)
-        download_button(aum_fund_data, "Descargar AUM por fondo", "aum_por_fondo_desde_cartera_v16.csv", key="dl_aum_fondo")
+        download_button(aum_fund_data, "Descargar AUM por fondo", "aum_por_fondo_desde_cartera_v17.csv", key="dl_aum_fondo")
 
         st.markdown("#### Evolución AUM por fondo")
         st.caption(
@@ -2026,7 +2206,7 @@ with tab_aum:
         else:
             aum_evo_data, fig_aum_evo = chart_aum_evolution_by_fund(aum_period, display_mode)
             st.plotly_chart(fig_aum_evo, use_container_width=True)
-            download_button(aum_evo_data, "Descargar evolución AUM por fondo", "aum_evolutivo_por_fondo_v16.csv", key="dl_aum_evo_fondo")
+            download_button(aum_evo_data, "Descargar evolución AUM por fondo", "aum_evolutivo_por_fondo_v17.csv", key="dl_aum_evo_fondo")
 
             with st.expander("Ver tabla resumida AUM por fondo", expanded=False):
                 pivot = aum_evo_data.pivot_table(index="fecha", columns="fondo", values="AUM_MM_CLP", aggfunc="sum").reset_index()
@@ -2037,7 +2217,7 @@ with tab_aum:
                     if c in show.columns:
                         show[c] = show[c].map(lambda x: fmt_num_chile(x, 0))
                 st.dataframe(show, hide_index=True, use_container_width=True, height=420)
-                download_button(pivot, "Descargar tabla evolutiva AUM", "tabla_aum_evolutivo_por_fondo_v16.csv", key="dl_tabla_aum_evo")
+                download_button(pivot, "Descargar tabla evolutiva AUM", "tabla_aum_evolutivo_por_fondo_v17.csv", key="dl_tabla_aum_evo")
 
 
 st.divider()
